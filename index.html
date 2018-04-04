@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title></title>
+   
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+	  <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/Buttons/2.0.0/css/buttons.min.css">
+    <!-- 阿里云html5播放器的CSS -->
+    <link rel="stylesheet" type="text/css" href="https://g.alicdn.com/de/prismplayer/2.5.0/skins/default/aliplayer-min.css">
+    <!-- <link href="//nos.netease.com/vod163/nep.min.css" rel="stylesheet"> -->
+    <style type="text/css">
+      .prism-big-play-btn{
+        position: absolute;
+        left: 400px  !important;
+        bottom: 212px  !important;
+        display: block;
+      }
+      body .verifycode-wrap {
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        z-index: 9999;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background-color: #F2F2F2;
+      }
+      .verifycode-wrap .out-title {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          width: 360px;
+      }
+      .verifycode-wrap .title {
+        top: 50%;
+        left: 50%;
+        height: 53px;
+        line-height: 50px;
+        border-bottom: 1px solid #E6E6E6;
+        color: #040405;
+        font-size: 18px;
+      }
+      .verifycode-wrap .input-wraps {
+        display: inline-block;
+        margin-top: 20px;
+        width: 300px;
+      }
+      .verifycode-wrap .input-wraps input {
+        margin-bottom: 10px;
+        padding: 0 0 0 10px;
+        width: 96%;
+        height: 46px;
+        font-size: 16px;
+        outline: none;
+        border: 1px solid #B3B6B8;
+      }
+      .verifycode-wrap .verifybtn {
+        display: inline-block;
+        margin-top: 15px;
+        width: 300px;
+        height: 46px;
+        line-height: 46px;
+        font-size: 16px;
+        color: #fff;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        background-color: #1E78DC;
+        cursor: pointer;
+      }
+    </style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   
+
+
+
+  </head>
+  <body>
+    <div class="head"></div>
+    <div class="container">
+          <div class="container-left">
+              <div class="left-top">
+                  <img src="images/header.png">
+                  <div class="title">
+                    <h4>易播测试</h4>
+                    <div class="text-msg">
+                      <span class="channel-heads">
+                        <i class=" iconfont icon-guankanrenshu"></i>
+                        <span class="">5248</span>
+                      </span>
+
+
+                      <div class="sharebox">
+                              <span class="channel-share" >
+                                <i class="iconfont icon-fenxiang"></i>
+                                <span class="">分享</span>
+                                <span class="sharebuttonbox btn-hidee">
+                                  <img class="sharebtn-wechat" src="images/wechat.png">
+                                  <img class="sharebtn-space" src="images/space.png" style="display: none;">
+                                  <img class="sharebtn-blog" src="images/blog.png" style="display: none;"> 
+                                </span>
+                              </span>
+                      </div>
+                    </div>
+                  </div> 
+                  <div class="text-phone">
+                    <img src="images/phone.png" class="phone">
+                    <p>手机观看</p>
+                    <div class="qrcode-float">
+                      <div class="qrcode-radius"><img class="img-code" src="images/1.jpg"></div>
+                    </div>
+                  </div>
+                  <div class="clear"></div> 
+              </div>
+              <div class="left-video" id="left-video">
+                <div  class="prism-player" id="J_prismPlayer" style="width: 865px;height: 487px;">
+                  
+                </div>
+              </div>
+              <div class="left-player-bar">
+                <div class="dm-box" style="display: none;">弹幕</div>
+                <div class="dm-check " id="dm-check" style="display: none;">
+                    <img src="images/btn-off.png" id="btn-off" class="btn-off btn-off-yes">
+                     <img src="images/btn-on.png" id="btn-on" class="btn-on btn-on-hidden"> 
+                </div>
+                <div class="interactive-icon-box" style="display: none;">
+                  <div class="interactive-icon icon-yellow">
+                    <div class="icon-zone">
+                    <p class="icon-text">我要<br/>抽奖</p>
+                    </div>
+                  </div>
+                  <div class="interactive-icon icon-blue" id="icon-vote" style="position: relative;">
+                    <div class=" icon-zone vote-icon">
+                    <i class="i-icon iconfont-btn">&#xe627;</i>
+                    <p class="icon-text">投票</p>
+                    </div>
+                    <!-- 文字投票 -->
+                    <div class="vote-content vote-content-hidden" id="vote-content" style="display: none;" >
+                        <div class="vote-box-close">
+                          <i class="icon-close">&#xe69a;</i>
+                        </div>
+                        <div class="vote-radio" style="display: none;" >
+                          <p class="vote-title">文字投票(单选)</p>
+                          <form name="vote-form">
+                            <ul>
+                              <li class="vote-item">
+                                <p class="vote-name">
+                                  <input type="radio" name="vote-ques-1" class="radio-input">
+                                  <label class="vote-text" for="">内容内容</label>
+                                </p>
+                              </li>
+                              <li class="vote-item">
+                                <p class="vote-name">
+                                  <input type="radio" name="vote-ques-1" class="radio-input" >
+                                  <label class="vote-text" for="">内容</label>
+                                </p>
+                              </li>
+                            </ul>
+                          </form>
+                        </div>
+                        <div class="vote-check" >
+                          <p class="vote-title">文字投票(多选，最多选2项)</p>
+                          <form name="vote-form">
+                            <ul>
+                              <li class="vote-item">
+                                <p class="vote-name">
+                                  <input type="checkbox" name="vote-ques-1" class="radio-input" >
+                                  <label class="vote-text" for="">内容</label>
+                                </p>
+                              </li>
+                              <li class="vote-item">
+                                <p class="vote-name">
+                                  <input type="checkbox" name="vote-ques-1" class="radio-input" >
+                                  <label class="vote-text" for="">内容</label>
+                                </p>
+                              </li>
+                            </ul>
+                          </form>
+                        </div>
+                        <p class="vote-button">投票</p>
+
+                    </div>
+                    <!-- 图文投票 -->
+                    <div id="vote-wrap" class="pc-vote-wrap vote-content-hidden"  >
+                      <div class="vote-img-title">
+                        <p class="vote-img-title-text">1/1(单选)图文投票单选</p>
+                        <div class="vote-img-close">
+                          <i class="anticon-close">&#xe617;</i>
+                        </div>
+                      </div>
+                    
+                        <div class="vote-select-group-warp">
+                          <div class="vote-select-item nth-odd">
+                            <div class="vote-selection-item-content">
+                              <div class="vote-select-img-wrap">
+                                <div class="select-img-wrap">
+                                  <img src="images/timg1.jpg" class="select-img" >
+                                </div>
+                                <p class="select-name">1</p>
+                              </div>
+                              <div class="vote-select-bottom-wrap">
+                                <div class="vote-num-wrap">0票</div>
+                                <div class="vote-btn-wrap">
+                                  <button class="img-vote-btn">投票</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="vote-select-item nth-even">
+                            <div class="vote-selection-item-content">
+                                <div class="vote-select-img-wrap">
+                                  <div class="select-img-wrap">
+                                    <img src="images/timg1.jpg" class="select-img" >
+                                  </div>
+                                  <p class="select-name">1</p>
+                                </div>
+                                <div class="vote-select-bottom-wrap">
+                                  <div class="vote-num-wrap">0票</div>
+                                  <div class="vote-btn-wrap">
+                                    <button class="img-vote-btn">投票</button>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                     
+                    </div>
+                  </div>
+                  <div class="interactive-icon icon-red" id="icon-reward" >
+                    <div class="icon-zone">
+                    <i class="i-icon iconfont-btn">&#xe602;</i>
+                    <p class="icon-text">打赏</p>
+                    </div>
+                    <!-- 现金打赏 -->
+                    
+                    <div class="reward-wrap index-display" id="reward-wrap">
+                      <div id="reward-pay-close">
+                        <i class="reward-icon closeicon">&#xe69a;</i>
+                      </div>
+                      
+                      <div class="cash-banner">
+                        <span>打赏</span>
+                      </div>
+                      <div class="cash-price-wrap">
+                        <p class="p-price">
+                          <span class="label">金额</span>
+                          <input type="text" name="money" class="money">
+                          <span class="pay-btn">微信支付</span>
+                          <span class="pay-type-btn">其他支付方式</span>
+                        </p>
+                      </div>
+                      <div class="cash-rank-box">
+                        <div class="cash-rank-title">
+                          <span class="title-left">共<i class="num" id="userNum">0</i>人参与</span>
+                          <span class="title-right">累计金额<i class="num" id="totalSum">￥0</i></span>
+                        </div>
+                      </div>
+                      <div id="cash-rank-content"></div>
+                    </div>
+                    <div class="reward-layer-shade index-display">
+                      <div id="reward-pay-close">
+                        <i class="reward-icon closeicon">&#xe69a;</i>
+                      </div>
+                    </div>
+                    <div class="layer-box index-display">
+                      <div class="verifycode-wrap">
+                        <div class="title">
+                          <i class="reward-icon close-icon">&#xe69a;</i>
+                          微信扫码支付
+                        </div>
+                        <div class="qr-img-div">
+                          <img src="images/user1.png">
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <div id="tab" class="tab" >
+                  <ol>
+                      <li class="active">热点</li>
+                      <li>时政</li>
+                      <li>财经</li>
+                  </ol>
+                  <ul>
+                      <li class="cur">热点</li>
+                      <li>时政</li>
+                      <li>财经</li>
+                  </ul>
+
+              </div>
+              
+          </div>
+
+          <div class="container-right" id="container-right">
+            <!-- <div class="right-ppt" id="right-ppt" style="display: none;">
+              <div class="ppt-show-box">
+                <a type="button" class="ppt-show-btn">
+                  <img src="images/switch.png" class="iconfont img-switch">
+                      <span class="switch">切换窗口</span>
+                </a>
+              </div>
+            </div> -->
+            <div class="common-box common-box-bg " id="common-box">
+              <input type="text" value="1" id="chat" style="display: none;" />
+              <p class="common-title">
+                <span>共<span class="common-num">99</span>条聊天</span>
+                <span class="common-nike">
+                  <span>我的昵称：</span>
+                  <span class="common-num">海外网友</span>
+                </span>
+              </p>
+              <iframe src="layim/demo.html" class="common-norank"></iframe>
+              <div>
+                <img src="images/wechat.png" style="width: 32px;height: 32px;padding-left: 10px;">
+              </div>
+            </div>
+          </div>
+       
+    </div>
+    <div class="footer" style="margin-top: 150px;">
+      <p class="footer-text">测试页脚</p>
+    </div>
+    
+    
+
+    <!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="layer/layer/layer.js"></script>
+
+    <script type="text/javascript" src="js/script.js"></script> 
+    <script type="text/javascript" src="https://g.alicdn.com/de/prismplayer/2.5.0/aliplayer-min.js"></script>
+    <!-- <script src="//nos.netease.com/vod163/nep.min.js"></script> -->
+    <script>
+      var verification = false;
+      if(verification){
+        layer.open({
+          type: 1,
+          closeBtn:0,
+          title:false,
+          area: ['360px', '250px'], //宽高
+          content: '<div class="verifycode-wrap">'+
+          '<p class="title out-title">欢迎观看本直播</p>'+
+          '<div id="verifbox" class="input-wraps">'+
+          '<input type="text" id="verifinput" name="verifinput" placeholder="请输入验证码" class="red-border">'+
+          '<span class="verifybtn" id="verifycodebtn">立即观看</span>'+
+          '</div>'+
+          '</div>'
+        });
+        $('#verifycodebtn').on('click',function(){
+          var verifinput = $('#verifinput').val();
+          if (verifinput == null || verifinput == '') {
+            $('#verifinput').focus();
+           layer.msg('验证码不能为空');
+         }else{
+           
+          }
+        })
+
+      }
+    
+    </script>
+    <script>
+        var player = new Aliplayer({
+        id: 'J_prismPlayer',
+        cover: "images/video.jpg",  //播放器封面图
+        width: '100%',
+        autoplay: false,
+         // isLive：true,//播放内容是否为直播，直播时会禁止用户拖动进度条
+        // autoPlayDelay:10,//延迟多长时间后播放，单位为秒
+        // autoPlayDelayDisplayText:'正在转码，请稍后……',//提示文本，比如正在转码，请稍后……
+        // 启用延迟播放时，需要把autoplay属性设置为true
+        //支持播放地址播放,此播放优先级最高
+        source : 'http://ktzbfw.com/AppName/StreamName180313130006857757.m3u8?auth_key=1556917206-0-0-967c9d0a14e188f1ae856668b6fcb500',
+        },function(player){
+            // console.log('播放器创建好了。')
+
+       });
+        player.on('error',function(e){
+      //隐藏
+      $('.prism-ErrorMessage').hide();
+      //解析
+      var errorData = e.paramData;
+      console.dir(errorData);
+    });
+    </script>
+
+   
+  </body>
+</html>
