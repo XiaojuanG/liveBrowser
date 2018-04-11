@@ -35,7 +35,8 @@ body{
 }
 .container-right{
 	float: right;
-	width: 320px;	
+	width: 320px;
+	position: relative;	
 }
 
 .left-top{
@@ -916,4 +917,77 @@ h2{
 }
 .index-display{
 	display: none;
+}
+/*红包*/
+.envelope-detail-wrap{
+	width: 382px;
+	height: 530px;
+	background-color: #fffaf5;
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: solid 1px #c6c6c6;
+    text-align: center;
+    position: absolute;
+}
+.pc-envelope{
+	right: 0;
+	bottom: 100px;
+}
+.envelope-detail-wrap .top{
+	position: relative;
+	padding-top: 26px;
+	height: 60px;
+	background-image: url(../images/envelope-top-03.png);
+	background-repeat: no-repeat;
+}
+.envelope-detail-wrap .top span{
+	display: inline-block;
+	position: relative;
+	max-width: 70%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 24px;
+	color: #fee4b2;
+}
+.envelope-detail-wrap .top .name-ext{
+	font-style: normal;
+	font-size: 24px;
+	color: #fee4b2;
+	vertical-align: top;
+}
+.envelope-detail-wrap .top .envelope-close{
+	position: absolute;
+	right: 20px;
+	top: 16px;
+	color: #ddbc84;
+	font-size: 20px;
+}
+.envelope-detail-wrap .slogan{
+	height: 68px;
+	line-height: 60px;
+	font-size: 18px;
+	color: #df3618;
+}
+.envelope-detail-wrap .mid{
+	position: relative;
+}
+.envelope-detail-wrap .mid .QRImage {
+    margin-top: 30px;
+    width: 208px;
+    height: 208px;
+    border: solid 1px #eeeeee;
+}
+.envelope-detail-wrap .mid .hints {
+    margin: 16px 0 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #121212;
+}
+.envelope-detail-wrap .mid a {
+    font-size: 18px;
+    color: #e05449;
+    cursor: pointer;
+    text-decoration: none;
 }
